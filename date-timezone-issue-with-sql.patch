@@ -1,0 +1,15 @@
+diff --git a/date_api/date_api_sql.inc b/date_api/date_api_sql.inc
+index a2adc65..0127fbd 100644
+--- a/date_api/date_api_sql.inc
++++ b/date_api/date_api_sql.inc
+@@ -202,7 +202,9 @@ class date_sql_handler {
+       case 'mysqli':
+         switch ($this->date_type) {
+           case DATE_UNIX:
+-            $field = "FROM_UNIXTIME($field)";
++            $comp_date_vars = get_object_vars($comp_date);
++            $time_zone_offset = date('Z',strtotime($comp_date_vars['date']));
++            $field = "FROM_UNIXTIME($field+$time_zone_offset)";
+             break;
+           case DATE_ISO:
+             $field = "STR_TO_DATE($field, '%Y-%m-%dT%T')";
