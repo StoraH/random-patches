@@ -1,0 +1,14 @@
+diff --git a/commerce_coupon_pct.module b/commerce_coupon_pct.module
+index 4b7d4c7..375ba63 100644
+--- a/commerce_coupon_pct.module
++++ b/commerce_coupon_pct.module
+@@ -82,7 +82,8 @@ function commerce_coupon_pct_commerce_coupon_type_configure($bundle, $reset = FA
+ function commerce_coupon_pct_commerce_coupon_granted_amount_alter(&$amount, $coupon, $order) {
+   // Get the price component.
+   if ($coupon->type == 'commerce_coupon_pct') {
+-    $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
++    $orders = entity_load('commerce_order', array($order->order_id));
++    $order_wrapper = entity_metadata_wrapper('commerce_order', $orders[$order->order_id]);
+     $coupon_wrapper = entity_metadata_wrapper('commerce_coupon', $coupon);
+ 
+     $amount = 0;
