@@ -1,0 +1,20 @@
+diff --git a/modules/node/node.module b/modules/node/node.module
+index 8f247cd..1a1a7cc 100644
+--- a/modules/node/node.module
++++ b/modules/node/node.module
+@@ -1176,12 +1176,12 @@ function node_save($node) {
+     $function = "field_attach_$op";
+     $function('node', $node);
+ 
+-    module_invoke_all('node_' . $op, $node);
+-    module_invoke_all('entity_' . $op, $node, 'node');
+-
+     // Update the node access table for this node.
+     node_access_acquire_grants($node);
+ 
++    module_invoke_all('node_' . $op, $node);
++    module_invoke_all('entity_' . $op, $node, 'node');
++
+     // Clear internal properties.
+     unset($node->is_new);
+     unset($node->original);
